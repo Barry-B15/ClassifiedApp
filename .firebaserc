@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "data2firebase",
+    "exit": "data2firebase"
+  }
+}
