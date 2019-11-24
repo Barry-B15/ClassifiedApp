@@ -18,34 +18,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.example.barry.classifiedapp.models.HitsList;
 import com.example.barry.classifiedapp.models.HitsObject;
 import com.example.barry.classifiedapp.models.Post;
 import com.example.barry.classifiedapp.util.ElasticSearchAPI;
 import com.example.barry.classifiedapp.util.PostListAdapter;
 import com.example.barry.classifiedapp.util.RecyclerViewMargin;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import com.google.firebase.database.*;
 import okhttp3.Credentials;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Part 13:
@@ -146,10 +136,11 @@ public class SearchFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        // control what keys user uses to start a search
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                // this was working before, but I saw my key changed to next not return,
+                // this was working before, but I saw my device key changed to next not return,
                 // app started crashing. Turns out add more options is a fix
                 // I added IME_ACTION_NEXT, IME_ACTION_GO and it works
                 if(actionId == EditorInfo.IME_ACTION_SEARCH
@@ -189,7 +180,7 @@ public class SearchFragment extends android.support.v4.app.Fragment {
                         searchString = searchString + " country:" + mPrefCountry;
                     }
 
-                    // make the request and soecify the data type we are looking for "hits"
+                    // make the request and specify the data type we are looking for "hits"
                     Call<HitsObject> call = searchAPI.search(headerMap, "AND", searchString);
 
                     call.enqueue(new Callback<HitsObject>() {
