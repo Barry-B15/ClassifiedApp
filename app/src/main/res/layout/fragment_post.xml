@@ -193,7 +193,7 @@
                             android:layout_marginLeft="10dp"
                             android:background="@null"
                             android:inputType="textEmailAddress"
-                            android:hint="Your contact email"
+                            android:hint="@string/email"
                             android:textColor="@color/Black"/>
 
                     </RelativeLayout>
